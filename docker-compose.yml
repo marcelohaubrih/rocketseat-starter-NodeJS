@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    nodejs-api-products:
+    nodejs-api-mongodb:
         build: .
         restart: always
         container_name: nodejs-api-products
