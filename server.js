@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
-
+require('dotenv').config();
 
 var whitelist = ['http://exemple.com']
 var corsOptions = {
@@ -15,7 +15,6 @@ var corsOptions = {
     }
   }
 }
-
 
 //Iniciando o APP
 const app = express();
@@ -31,7 +30,7 @@ app.use((req, res, next) => {
 
 //Iniciando o DB
 mongoose.connect(
-    'mongodb://10.0.0.66:27017/nodeapi', 
+    `mongodb://${process.env.DB_URL || localhost}:${process.env.DB_PORT || 27017}/nodeapi`, 
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true,
@@ -51,4 +50,6 @@ requireDir('./src/models');
 // Rotas
 app.use('/api', require('./src/routes'));
 
-app.listen(3001);
+app.listen(process.env.API_PORT || 3001, () => {
+  console.log(`Servidor iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);
+});
