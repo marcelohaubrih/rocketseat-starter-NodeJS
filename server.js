@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 
 //Iniciando o DB
 mongoose.connect(
-    `mongodb://${process.env.DB_URL || localhost}:${process.env.DB_PORT || 27017}/nodeapi`, 
+    `mongodb://${process.env.DB_URL || 'localhost'}:${process.env.DB_PORT || 27017}/nodeapi`, 
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true,
