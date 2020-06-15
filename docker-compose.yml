@@ -11,15 +11,15 @@ services:
         ports:
             - '3001:3001'
         environment:
-            - DB_URL=mongo
+            - DB_URL=nodejs-db-mongo
             - DB_PORT=27017
             - API_PORT=3001
         depends_on: 
-            - mongo
+            - nodejs-db-mongo
         networks: 
-            - bridge          
+            - nodejs-api          
 
-    mongo:
+    nodejs-db-mongo:
         image: mongo
         restart: always
         ports:
@@ -27,10 +27,10 @@ services:
         volumes: 
             - mongo-express-data:/data
         networks: 
-            - bridge
+            - nodejs-api
 volumes: 
     mongo-express-data:
 
 networks: 
-    bridge:
+    nodejs-api:
         driver: bridge

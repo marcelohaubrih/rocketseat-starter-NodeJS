@@ -11,7 +11,7 @@ module.exports = {
             });
         }else{
             await Product.paginate({}, {page, limit:10}).then((product) => {
-                console.log(product.pages);
+                //console.log(product.pages);
                 if(page <= product.pages){
                     return res.json(product);
                 }else{
