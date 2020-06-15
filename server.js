@@ -21,13 +21,13 @@ var corsOptions = {
 const app = express();
 app.use(express.json());
 
-//app.use((req, res, next) => {
-//    console.log('Acessou o Midller');
-//    res.header('Access-Control-Allow-Origin',"http://exemplo.com")
+app.use((req, res, next) => {
+    //console.log("Acessou o Middleware!");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     app.use(cors());
-//    next();
-//});
-//
+    next();
+});
 
 //Iniciando o DB
 mongoose.connect(
