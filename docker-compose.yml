@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+    nodejs-api-products:
+        build: .
+        restart: always
+        container_name: nodejs-api-products
+        volumes: 
+            - .:/home/node/api
+            - /home/node/api/node_modules
+        ports:
+            - '3001:3001'
+        environment:
+            - DB_URL: localhost
+            - DB_PORT: 27017
+            - API_PORT: 3002
+        depends_on: 
+            - mongo
+            - mongo-express 
+        networks: 
+            - nodejs-api-network          
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME: root
+            - MONGO_INITDB_ROOT_PASSWORD: a1b2c3d4e5
+        networks: 
+            - nodejs-api-network
+    
+    mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+        - 27017:27017
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            - ME_CONFIG_MONGODB_ADMINPASSWORD: a1b2c3d4e5
+        volumes: 
+            - mongo-express-data:/data
+        networks: 
+            - nodejs-api-network
+volumes: 
+    mongo-express-data:
+
+networks:
+    nodejs-api-network:
+        driver: bridge
