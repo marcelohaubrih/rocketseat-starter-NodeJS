@@ -3,6 +3,7 @@ const routes = express.Router();
 
 const ProductController = require('./controllers/ProductController');
 const UserController = require('./controllers/UserController');
+const RepositoryController = require('./controllers/RepositoryController');
 
 
 //Users
@@ -19,6 +20,14 @@ routes.get('/products/:id', ProductController.show);
 routes.post('/products', ProductController.store);
 routes.put('/products/:id', ProductController.update);
 routes.delete('/products/:id', ProductController.destroy);
+
+//Repositories
+routes.get('/repositories', RepositoryController.index);
+routes.get('/repositories/:id', RepositoryController.show);
+routes.post('/repositories', RepositoryController.store);
+routes.post('/repositories/:id/like', RepositoryController.likeup);
+routes.put('/repositories/:id', RepositoryController.update);
+routes.delete('/repositories/:id', RepositoryController.destroy);
 
 
 

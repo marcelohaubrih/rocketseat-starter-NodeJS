@@ -51,5 +51,5 @@ requireDir('./src/models');
 app.use('/api', require('./src/routes'));
 
 app.listen(process.env.API_PORT || 3001, () => {
-  console.log(`Servidor iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);
+  console.log(`🔓-💾 - Servidor iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);
 });
