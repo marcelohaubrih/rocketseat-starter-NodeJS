@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
+
 require('dotenv').config();
 
 var whitelist = ['http://exemple.com']
@@ -43,9 +44,7 @@ mongoose.connect(
     console.log("Erro: Conexão com MongoDB não foi realizada com sucesso!");
 });
 
-
 requireDir('./src/models');
-
 
 // Rotas
 app.use('/api', require('./src/routes'));

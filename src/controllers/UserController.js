@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
-const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
+const authConfig = require('../config/auth.json');
 
+/*
 signToken = user => {
     return jwt.sign({
         iss: 'CodeWorkr_API',
@@ -11,6 +13,25 @@ signToken = user => {
         exp: new Date().setDate(new Date().getDate() + 1) //Current time + 1 day ahead
     }, 'userauthenticate');
 };
+
+    return jwt.sign({
+        iss: {
+            id,
+            title: 'CodeWork_API',
+            description: 'NodeJS-API-mongo'
+        },
+        sub: authConfig.secret,
+        iat: new Date().getTime(),// Current time
+        exp: new Date().setDate(new Date().getDate() + 1),
+    }, 'userauthenticate');
+
+*/
+function generateToken(params = {}){
+    const { id, email } = params;
+    return jwt.sign(params, authConfig.secret, {
+        expiresIn: 86400,
+    });       
+}
 
 module.exports = {
     async index(req, res){
@@ -22,11 +43,7 @@ module.exports = {
             });
         }else{
             await User.paginate({}, {page, limit:10}).then((user) => {
-                //console.log(product.pages);
                 if(page <= user.pages){
-                    //const tempUsers = JSON.stringify(user.docs);
-                    //const tempUsers = Object.assign({},user.docs);
-                    //console.log(tempUsers.name);
                     return res.json(user);
                 }else{
                     return res.status(400).json({
@@ -74,47 +91,45 @@ module.exports = {
             });
         }
 
-        const user = await User.create(req.body, (err) => {
-            if(err) return res.status(400).json({
-                error: true,
-                message: "Erro: usuário não cadastrado!"
-            });
-            
-            return res.status(200).json({
-                error: false,
-                message: "Usuário cadastrado com sucesso"
-            });
+        const user = await User.create(req.body);
+
+        user.password = undefined;
+
+        return res.status(200).json({
+            error: false,
+            message: "Usuário cadastrado com sucesso",
+            token: generateToken({id: user.id, email: user.email}),
+            user,
         });
-        
     },
 
     async login(req, res){
-        const email = req.body.email;
-        const password = req.body.password;
-        
-        User.findOne({email: email, password: password}, (err, user) => {
-            if(err){ 
-                //console.log(err);
-                return res.status(400).json({
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email }).select('+password');
+        if (!user){
+            return res.status(404).json({
                 error: true,
                 login: false,
-                message: "Erro ao processar o Login!"
-                });
-            };
-            if(!user){
-                //console.log(user);
-                return res.status(404).json({
-                    error: true,
-                    login: false,
-                    message: "Usuário/Senha inválidos!"
-                })
-            }
-            return res.status(200).json({
-                error: false,
-                login: true,
-                message: "Login efetuado!"
-            })
-        });
+                message: "User not found"
+            });            
+        }
+        if (!await bcrypt.compare(password, user.password)){
+            return res.status(404).json({
+                error: true,
+                login: false,
+                message: "Invalid password"
+            });             
+        }
+        user.password = undefined;
+
+        return res.status(200).json({
+            error: false,
+            login: true,
+            message: "Login efetuado!",
+            token: generateToken({id: user.id, email: user.email}),
+            userData: user,
+        })        
     },
 
     async update(req, res){
