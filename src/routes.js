@@ -5,7 +5,6 @@ const ProductController = require('./app/controllers/ProductController');
 const UserController = require('./app/controllers/UserController');
 const RepositoryController = require('./app/controllers/RepositoryController');
 const ProjectController = require("./app/controllers/ProjectController");
-//const TaskController = require("./app/controllers/TaskController");
 
 require('../src/app/controllers/index');
 

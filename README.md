@@ -1,10 +1,16 @@
 ## Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat
 
 Criar o .env com as seguintes variaveis ambientes
-DB_URL = (Padrão localhost)
-DB_PORT = (Padrão 27017)
-API_PORT = (Padrão 3001)
-
+DB_URL=(Padrão localhost)
+DB_PORT=(Padrão 27017)
+API_PORT=(Padrão 3001)
+SMTP_HOST=(url)
+SMTP_PORT=465 or 587
+SMTP_USER=(user ou email)
+SMTP_PASS=(password)
+SMTP_EMAIL_FROM=(from@email.com)
+SMTP_NOME_ENV=API-GOSTACK
+SMTP_EMAIL_REC=
 
 Para criação da maquina API apenas com o comando: 
     - docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina)

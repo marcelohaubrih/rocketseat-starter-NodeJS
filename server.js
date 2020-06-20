@@ -51,4 +51,9 @@ app.use('/api', require('./src/routes'));
 
 app.listen(process.env.API_PORT || 3001, () => {
   console.log(`🔓-💾 - Servidor iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);
+  console.log(`Variaveis ambiente configuradas:`);
+  console.log(`DB_URL: ${process.env.DB_URL} - DB_PORT: ${process.env.DB_PORT} - API_PORT: ${process.env.API_PORT}`);
+  console.log(`SMTP_HOST: ${process.env.SMTP_HOST} - SMTP_PORT: ${process.env.SMTP_PORT}`);
+  console.log(`SMTP_USER: ${process.env.SMTP_USER} - SMTP_PASS: ${process.env.SMTP_PASS}`);
+  console.log(`SMTP_EMAIL_FROM: ${process.env.SMTP_EMAIL_FROM} - SMTP_NOME_ENV: ${process.env.SMTP_NOME_ENV}`);
 });
