@@ -2,30 +2,11 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
-const authConfig = require('../config/auth.json');
+const authConfig = require('../../config/auth.json');
+const crypto = require('crypto');
+const mailer = require('../../modules/mailer');
+require('dotenv').config();
 
-/*
-signToken = user => {
-    return jwt.sign({
-        iss: 'CodeWorkr_API',
-        sub: 'NodeJS-API-mongoDB',
-        iat: new Date().getTime(),// Current time
-        exp: new Date().setDate(new Date().getDate() + 1) //Current time + 1 day ahead
-    }, 'userauthenticate');
-};
-
-    return jwt.sign({
-        iss: {
-            id,
-            title: 'CodeWork_API',
-            description: 'NodeJS-API-mongo'
-        },
-        sub: authConfig.secret,
-        iat: new Date().getTime(),// Current time
-        exp: new Date().setDate(new Date().getDate() + 1),
-    }, 'userauthenticate');
-
-*/
 function generateToken(params = {}){
     const { id, email } = params;
     return jwt.sign(params, authConfig.secret, {
@@ -70,9 +51,7 @@ module.exports = {
             }
             return res.json({
                 error: false, 
-                id: user._id,
-                name: user.name,
-                email: user.email
+                user,
             });
         }).catch((erro) => {
             return res.status(400).json({
@@ -128,8 +107,95 @@ module.exports = {
             login: true,
             message: "Login efetuado!",
             token: generateToken({id: user.id, email: user.email}),
-            userData: user,
+            user,
         })        
+    },
+
+    async forgot(req, res){
+        const { email } = req.body;
+        try{
+            const user = await User.findOne({ email })
+            if (!user) return res.status(400).json({
+                error: true,
+                message: "Error: user not found!"
+            }); 
+
+            const token = crypto.randomBytes(20).toString('hex');
+            const now = new Date();
+            now.setHours(now.getHours()+1);
+
+            await User.findByIdAndUpdate(user.id, {
+                '$set':{
+                    passwordResetToken: token,
+                    passwordResetExpires: now,
+                }
+            })
+            mailer.sendMail({
+                to: email,
+                from: process.env.SMTP_EMAIL_FROM,
+                template: 'auth/forgot_password',
+                subject: 'APP-GOSTACK - forgot password',
+                //text: `seu token: ${token}`,
+                //html: `<p>seu token: ${token}</p>`,
+                context: { token },
+            }, (err) =>{
+                console.log(err);
+                if(err) return res.status(400).json({
+                    error: true,
+                    message: "Cannot send forgot password email!"
+                }); 
+                console.log(token, now);
+                return res.status(200).json({
+                    error: false,
+                    message: "Token de reset de email criado, entre no seu email e verifique o link de reset"
+                });
+            });
+
+        } catch(err){
+            console.log(err);
+            return res.status(400).json({
+                error: true,
+                message: "Error on forgot password, try again"
+            });
+        }
+    },
+
+    async reset(req, res){
+        const { email, token, password } = req.body;
+        try{
+            const user = await User.findOne({ email }).select('+ passwordResetToken passwordResetExpires');
+            if (!user) return res.status(400).json({
+                error: true,
+                message: "Error: user not found!"
+            }); 
+
+            if(token !== user.passwordResetToken) return res.status(400).json({
+                error: true,
+                message: "Token invalid!"
+            }); 
+
+            const now = new Date();
+            if(now > user.passwordResetExpires) return res.status(400).json({
+                error: true,
+                message: "Token Expired, generete a new one!"
+            });            
+
+            user.password = password;
+            user.passwordResetExpires = now;
+            await user.save();
+
+            return res.status(200).json({
+                error: false,
+                message: "Password update sucessful"
+            });
+
+        } catch(err){
+            console.log(err);
+            return res.status(400).json({
+                error: true,
+                message: "Error cannot reset password, try again"
+            });
+        }
     },
 
     async update(req, res){

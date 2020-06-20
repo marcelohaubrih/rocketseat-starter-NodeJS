@@ -23,11 +23,15 @@ Versão 1.0:
     name:String
     email:String
     password:String
+    passwordResetToken:String
+    passwordResetExpires:Date
     createdAt:Date
 routes.get('/user', UserController.index);
 routes.get('/user/:id', UserController.show);
 routes.post('/user', UserController.store);
 routes.post('/user/login', UserController.login);
+routes.post('/user/forgot_password', UserController.forgot);
+routes.post('/user/reset_password', UserController.reset);
 routes.put('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.destroy);
 

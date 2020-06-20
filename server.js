@@ -44,7 +44,7 @@ mongoose.connect(
     console.log("Erro: Conexão com MongoDB não foi realizada com sucesso!");
 });
 
-requireDir('./src/models');
+requireDir('./src/app/models');
 
 // Rotas
 app.use('/api', require('./src/routes'));

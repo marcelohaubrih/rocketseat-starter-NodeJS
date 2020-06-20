@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth.json');
+const authConfig = require('../../config/auth.json');
 
 module.exports = (req, res, next) => {
     const authHeaders = req.headers.authorization;
@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
     }
 
     const [ scheme, token ] = parts;
-    console.log(scheme);
+
     if(!/^Bearer$/i.test(scheme)){
         return res.status(401).send({ error: 'token malformated'});
     }
