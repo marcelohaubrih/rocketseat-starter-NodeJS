@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
 
-require('dotenv').config();
+require('dotenv').config({  
+  path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
+})
 
 var whitelist = ['http://exemple.com']
 var corsOptions = {
