@@ -1,3 +1,7 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/marcelohaubrih/rocketseat-starter-NodeJS)
+
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/marcelohaubrih/rocketseat-starter-NodeJS)
+
 ## Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat
 
 Criar o .env com as seguintes variaveis ambientes
