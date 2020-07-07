@@ -4,6 +4,7 @@ Criar o .env com as seguintes variaveis ambientes
 DB_URL=(Padrão localhost)
 DB_PORT=(Padrão 27017)
 API_PORT=(Padrão 3001)
+SOCKET_PORT=(Padrão 3002)
 SMTP_HOST=(url)
 SMTP_PORT=465 or 587
 SMTP_USER=(user ou email)
@@ -65,3 +66,7 @@ routes.post('/repositories', RepositoryController.store);
 routes.post('/repositories/:id/like', RepositoryController.likeup);
 routes.put('/repositories/:id', RepositoryController.update);
 routes.delete('/repositories/:id', RepositoryController.destroy);
+
+
+### RELEASES
+1.3.1 - Adicionado suporte a SocketIO
