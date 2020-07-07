@@ -15,6 +15,23 @@ html, body {
     align-items: center;
     flex-direction: column;
   }
+
+  #headerContent {
+    display: flex;
+    width: 600px;
+    padding: 10px;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-items: start;
+    background: #069;
+    color: #fff;
+    border-radius: 10px;
+  }
+
+  #headerContent div{
+    font-size: bold;
+    margin-left: 5px;
+  }
   
   input {
     width: 600px;

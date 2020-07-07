@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
-const path = require('path');
+
 
 require('dotenv').config({  
   path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
@@ -23,22 +23,6 @@ var corsOptions = {
 //Iniciando o APP
 const app = express();
 
-//Inicio SocketIO
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-
-//Inicio Serviço HTML
-
-app.use(express.static(path.join(__dirname, 'src/public')));
-app.set('views', path.join(__dirname, 'src/public'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-
-app.use('/', (req, res) => {
-  res.render('index.html');
-});
-
-//Fim Serviço HTML
 
 app.use(express.json());
 
@@ -69,26 +53,11 @@ requireDir('./src/app/models');
 
 // Rotas
 app.use('/api', require('./src/routes'));
+// Fim Rotas
 
-//Inicio consulta Socket.IO
-
-let messages = [];
-
-io.on('connection', socket => {
-  console.log(`Socket conectado: ${socket.id}`);
-  socket.emit('previousMessages', messages);
-
-  socket.on('sendMessage', data => {
-    messages.push(data);
-    socket.broadcast.emit('receivedMessage', data);
-  });
-});
-
-//Fim consulta Socket.IO
-
-server.listen(3002, () =>{
-  console.log(`🔓-💾 - Servidor Socket.IO iniciado na porta ${process.env.SOCKET_PORT || 3002}: http://localhost:${process.env.SOCKET_PORT || 3002}`);
-});
+//Inicio Socket.IO
+require('./src/modules/socket');
+//Fim Socket.IO
 
 app.listen(process.env.API_PORT || 3001, () => {
   console.log(`🔓-💾 - Servidor iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);

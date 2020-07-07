@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste Socket_IO 2</title>
+    <title>CHAT Socket_IO</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js" integrity="sha512-c4FE2uNeKCAtchLEpO9yimL8CuifrlEMnORyTNw0TAkGqYpqADT8qX/DG/ASy+F29KUSgEgrPidbNPENW17QFQ==" crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/Lautert/helpers/master/javascript.helpers.js"></script>
     <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
     <form id="chat">
+        <div id="headerContent">
+            <span>Usuários On-Line:</span>
+            <div id="users"></div>
+        </div>
         <input type="text" name="username" placeholder="digite seu usuário">
         <div class="messages"></div>
         <input type="text" name="message" placeholder="digite sua mensagem">
@@ -18,15 +23,33 @@
     </form>
     <script type="text/javascript">
         var socket = io('http://localhost:3002');
-        //console.log(socket);
+    
         function renderMessage(message){
-            $('.messages').append('<div class="message"><strong>'+ message.author +'</strong>: '+ message.message +'</div>')
+            var data = new Date(message.createdAt);
+            dataFormatada = data.toDate('dd/mm/yyyy hh:ii:ss');
+            d = `${data.getDate()}/${data.getMonth()}`;
+            $('.messages').append('<div class="message"><strong>'+ message.author +'</strong>: <span class="content">'+ message.message +'</span> - <span>'+ dataFormatada +'</span></div>')
         }
 
+        socket.on('disconnect', function(){
+            //console.log('Desconectado');
+            $('.messages').html('<div class="message"><strong>DESCONECTADO - '+ new Date().toDate('dd/mm/yyyy hh:ii:ss') +'</strong></div>');
+        })
+
+        socket.on('connect', function(){
+            //console.log('Desconectado');
+            $('.messages').append('<div class="message"><strong>CONECTADO - '+ new Date().toDate('dd/mm/yyyy hh:ii:ss') +'</strong></div>');
+        })        
+
         socket.on('previousMessages', function(messages){
+            
             for (message of messages) {
                 renderMessage(message);
             }
+        });
+
+        socket.on('connectedUsers', function(data){
+            $('#users').html(data.length)
         });
 
         socket.on('receivedMessage', function(message){
@@ -37,15 +60,16 @@
             event.preventDefault();
             var author = $('input[name=username]').val();
             var message = $('input[name=message]').val();
+            var createdAt = new Date();
 
             if(author.length && message.length){
                 var messageObject = {
                     author: author,
                     message: message,
+                    createdAt: createdAt,
                 };
                 renderMessage(messageObject)
                 socket.emit('sendMessage', messageObject);
-                //console.log('Socket Response: ',socket);
             }
         });
     </script>
