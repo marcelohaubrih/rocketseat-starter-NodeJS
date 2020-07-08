@@ -1,5 +1,8 @@
 # API_NODEJS + Docker
-> Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
+> Inicialmente desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
+> **OBS:**  Constantemente atualizado com rotas e modulos para treinamento.
+
+
 <p align="center">
    <img alt="NodeJS" title="#NodeJS" src="https://user-images.githubusercontent.com/63422556/86950021-f1a08100-c125-11ea-923b-6e9b47c91bac.png" width="160px" />
    <img alt="Docker" title="#Docker" src="https://user-images.githubusercontent.com/63422556/86950047-fc5b1600-c125-11ea-996b-c3e5ea30d0b8.png" width="210px" />
