@@ -56,7 +56,7 @@ password|String
 passwordResetToken | String
 passwordResetExpires | Date
 createdAt | Date
-### **Rotas**
+* **Rotas**
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
 - [x] routes.post('/user', UserController.store);
@@ -75,7 +75,7 @@ title|String
 description|String
 url|String
 createdAt|Date
-### **Rotas**
+* **Rotas**
 - [x] routes.get('/products', ProductController.index);
 - [x] routes.get('/products/:id', ProductController.show);
 - [x] routes.post('/products', ProductController.store);
@@ -90,7 +90,7 @@ title|String
 url|String
 techs|Number
 createdAt|Date
-### **Rotas**
+* **Rotas**
 - [x] routes.get('/repositories', RepositoryController.index);
 - [x] routes.get('/repositories/:id', RepositoryController.show);
 - [x] routes.post('/repositories', RepositoryController.store);
