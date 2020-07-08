@@ -31,8 +31,9 @@ SMTP_EMAIL_REC=
 
 #### Users
 ##### Campos
+
    | Campo                | Tipo    |
-   |....................  |.........|
+   |......................|.........|
    | name                 | String  |
    | email                | String  |
    | avatar               | String  |
