@@ -16,13 +16,13 @@ SMTP_EMAIL_REC=
 
 ### Docker
 ```
-Para criação da maquina API apenas com o comando: 
-    - docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
-    - docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
+### Para criação da maquina API apenas com o comando: 
+    * docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
+    * docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
     
-Para Execução da API e DB juntos executar: 
-    - docker-compose up 
-    - docker-compose up --build (Para recriar as imagens com as alterações) 
+### Para Execução da API e DB juntos executar: 
+    * docker-compose up 
+    * docker-compose up --build (Para recriar as imagens com as alterações) 
 
  
 ### Versão 1.0: 
@@ -79,7 +79,7 @@ host:3002/chat/
 //Link acesso a arquivos upload imagens
 host:3001/files/
 
+
 ```
 ### RELEASES
-
 1.3.1 - Adicionado suporte a SocketIO
