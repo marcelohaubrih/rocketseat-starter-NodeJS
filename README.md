@@ -30,14 +30,14 @@ SMTP_EMAIL_REC=
 ### Dispoível as seguintes rotas
 
 #### Users
-- Campos
-*   name:String
-*   email:String
-*   avatar:String
-*   password:String
-*   passwordResetToken:String
-*   passwordResetExpires:Date
-*   createdAt:Date
+##### Campos
+   name:String
+   email:String
+   avatar:String
+   password:String
+   passwordResetToken:String
+   passwordResetExpires:Date
+   createdAt:Date
 
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
@@ -50,11 +50,11 @@ SMTP_EMAIL_REC=
 - [x] routes.delete('/user/:id', UserController.destroy);
 
 #### Products
-- Campos
-*   title:String
-*   description:String
-*   url:String
-*   createdAt:Date
+##### Campos
+   title:String
+   description:String
+   url:String
+   createdAt:Date
 
 - [x] routes.get('/products', ProductController.index);
 - [x] routes.get('/products/:id', ProductController.show);
@@ -62,12 +62,12 @@ SMTP_EMAIL_REC=
 - [x] routes.put('/products/:id', ProductController.update);
 - [x] routes.delete('/products/:id', ProductController.destroy);
 
-### Repositories
-- Campos
-*   title:String
-*   url:String
-*   techs:Number
-*   createdAt:Date
+#### Repositories
+##### Campos
+   title:String
+   url:String
+   techs:Number
+   createdAt:Date
 
 - [x] routes.get('/repositories', RepositoryController.index);
 - [x] routes.get('/repositories/:id', RepositoryController.show);
