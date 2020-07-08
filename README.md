@@ -1,9 +1,6 @@
 # API_NODEJS + Docker
 > Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
 
 
 ### Criar o .env com as seguintes variaveis ambientes 
@@ -21,34 +18,29 @@ SMTP_NOME_ENV=API-GOSTACK
 SMTP_EMAIL_REC= 
 ```
 
-### Docker
+### **Docker**
 ```sh
-##### Para criação da maquina API apenas com o comando: 
+- Para criação da maquina API apenas com o comando: 
     * docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
     * docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
     
-##### Para Execução da API e DB juntos executar: 
+- Para Execução da API e DB juntos executar: 
     * docker-compose up 
     * docker-compose up --build (Para recriar as imagens com as alterações) 
 ```
- 
-## Versão 1.0: 
- 
-### Dispoível as seguintes rotas
+---
+## Versão 1.4.4 
 
 #### Users
-
-# Campos
-
-   | Campo                | Tipo    |
-   |......................|.........|
-   | name                 | String  |
-   | email                | String  |
-   | avatar               | String  |
-   | password             | String  |
-   | passwordResetToken   | String  |
-   | passwordResetExpires | Date    |
-   | createdAt            | Date    |
+Campo | Tipo 
+------|-----
+name | String
+email | String
+avatar|String
+password|String
+passwordResetToken | String
+passwordResetExpires | Date
+createdAt | Date
 
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
@@ -59,27 +51,33 @@ SMTP_EMAIL_REC=
 - [x] routes.patch('/user/avatar/:id/:email', UserController.avatar);
 - [x] routes.put('/user/:id', UserController.update);
 - [x] routes.delete('/user/:id', UserController.destroy);
+---
 
 #### Products
-##### Campos
-   title:String
-   description:String
-   url:String
-   createdAt:Date
+ Campo | Tipo
+-------|-----
+title|String
+description|String
+url|String
+createdAt|Date
 
+### Rotas
 - [x] routes.get('/products', ProductController.index);
 - [x] routes.get('/products/:id', ProductController.show);
 - [x] routes.post('/products', ProductController.store);
 - [x] routes.put('/products/:id', ProductController.update);
 - [x] routes.delete('/products/:id', ProductController.destroy);
+---
 
 #### Repositories
-##### Campos
-   title:String
-   url:String
-   techs:Number
-   createdAt:Date
+ Campo | Tipo
+-------|-----
+title|String
+url|String
+techs|Number
+createdAt|Date
 
+### Rotas
 - [x] routes.get('/repositories', RepositoryController.index);
 - [x] routes.get('/repositories/:id', RepositoryController.show);
 - [x] routes.post('/repositories', RepositoryController.store);
@@ -87,13 +85,21 @@ SMTP_EMAIL_REC=
 - [x] routes.put('/repositories/:id', RepositoryController.update);
 - [x] routes.delete('/repositories/:id', RepositoryController.destroy);
 
-### Link acesso ao CHAT - Socket.IO
-- [x] host:3002/chat/
-
-### Link acesso a arquivos upload imagens
-- [x] host:3001/files/
-
-
+#### Link acesso ao CHAT - Socket.IO
+```sh
+host:3002/chat/
 ```
+#### Link acesso a arquivos upload imagens
+```sh
+host:3001/files/
+```
+---
+
+
 ### RELEASES
-1.3.1 - Adicionado suporte a SocketIO
+
+* 1.3.1 - Adicionado suporte a SocketIO
+* 1.4.1 - Adicionado suporte a avatar Upload
+* 1.4.2 - Fix Rota de avatar
+* 1.4.3 - Adicionado rota fixa /files
+* 1.4.4 - Fix rota fixa do Chat Socket.IO
