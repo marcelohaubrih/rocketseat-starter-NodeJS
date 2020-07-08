@@ -44,9 +44,9 @@ SMTP_EMAIL_REC=
     * docker-compose up --build (Para recriar as imagens com as alterações) 
 ```
 ---
-## Versão 1.4.4 
+# Versão 1.4.4 
 
-#### Users
+## Users
 Campo | Tipo 
 ------|-----
 name | String
@@ -56,7 +56,7 @@ password|String
 passwordResetToken | String
 passwordResetExpires | Date
 createdAt | Date
-
+### **Rotas**
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
 - [x] routes.post('/user', UserController.store);
@@ -68,15 +68,14 @@ createdAt | Date
 - [x] routes.delete('/user/:id', UserController.destroy);
 ---
 
-#### Products
+## Products
  Campo | Tipo
 -------|-----
 title|String
 description|String
 url|String
 createdAt|Date
-
-### Rotas
+### **Rotas**
 - [x] routes.get('/products', ProductController.index);
 - [x] routes.get('/products/:id', ProductController.show);
 - [x] routes.post('/products', ProductController.store);
@@ -84,15 +83,14 @@ createdAt|Date
 - [x] routes.delete('/products/:id', ProductController.destroy);
 ---
 
-#### Repositories
+## Repositories
  Campo | Tipo
 -------|-----
 title|String
 url|String
 techs|Number
 createdAt|Date
-
-### Rotas
+### **Rotas**
 - [x] routes.get('/repositories', RepositoryController.index);
 - [x] routes.get('/repositories/:id', RepositoryController.show);
 - [x] routes.post('/repositories', RepositoryController.store);
