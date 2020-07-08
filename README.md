@@ -1,7 +1,13 @@
-## Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat
+# API_NODEJS + Docker
+> Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
+
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Downloads Stats][npm-downloads]][npm-url]
+
 
 ### Criar o .env com as seguintes variaveis ambientes 
-```
+```sh
 DB_URL=(Padrão localhost) 
 DB_PORT=(Padrão 27017) 
 API_PORT=(Padrão 3001) 
@@ -13,17 +19,18 @@ SMTP_PASS=(password)
 SMTP_EMAIL_FROM=(from@email.com) 
 SMTP_NOME_ENV=API-GOSTACK 
 SMTP_EMAIL_REC= 
+```
 
 ### Docker
-```
-### Para criação da maquina API apenas com o comando: 
+```sh
+##### Para criação da maquina API apenas com o comando: 
     * docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
     * docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
     
-### Para Execução da API e DB juntos executar: 
+##### Para Execução da API e DB juntos executar: 
     * docker-compose up 
     * docker-compose up --build (Para recriar as imagens com as alterações) 
-
+```
  
 ## Versão 1.0: 
  
