@@ -25,59 +25,62 @@ SMTP_EMAIL_REC=
     * docker-compose up --build (Para recriar as imagens com as alterações) 
 
  
-### Versão 1.0: 
-``` 
-## Dispoível as seguintes rotas
+## Versão 1.0: 
+ 
+### Dispoível as seguintes rotas
 
-//Users
+#### Users
 - Campos
-    name:String
-    email:String
-    avatar:String
-    password:String
-    passwordResetToken:String
-    passwordResetExpires:Date
-    createdAt:Date
-routes.get('/user', UserController.index);
-routes.get('/user/:id', UserController.show);
-routes.post('/user', UserController.store);
-routes.post('/user/login', UserController.login);
-routes.post('/user/forgot_password', UserController.forgot);
-routes.post('/user/reset_password', UserController.reset);
-routes.patch('/user/avatar/:id/:email', UserController.avatar);
-routes.put('/user/:id', UserController.update);
-routes.delete('/user/:id', UserController.destroy);
+*   name:String
+*   email:String
+*   avatar:String
+*   password:String
+*   passwordResetToken:String
+*   passwordResetExpires:Date
+*   createdAt:Date
 
-//Products
+- [x] routes.get('/user', UserController.index);
+- [x] routes.get('/user/:id', UserController.show);
+- [x] routes.post('/user', UserController.store);
+- [x] routes.post('/user/login', UserController.login);
+- [x] routes.post('/user/forgot_password', UserController.forgot);
+- [x] routes.post('/user/reset_password', UserController.reset);
+- [x] routes.patch('/user/avatar/:id/:email', UserController.avatar);
+- [x] routes.put('/user/:id', UserController.update);
+- [x] routes.delete('/user/:id', UserController.destroy);
+
+#### Products
 - Campos
-    title:String
-    description:String
-    url:String
-    createdAt:Date
-routes.get('/products', ProductController.index);
-routes.get('/products/:id', ProductController.show);
-routes.post('/products', ProductController.store);
-routes.put('/products/:id', ProductController.update);
-routes.delete('/products/:id', ProductController.destroy);
+*   title:String
+*   description:String
+*   url:String
+*   createdAt:Date
 
-//Repositories
+- [x] routes.get('/products', ProductController.index);
+- [x] routes.get('/products/:id', ProductController.show);
+- [x] routes.post('/products', ProductController.store);
+- [x] routes.put('/products/:id', ProductController.update);
+- [x] routes.delete('/products/:id', ProductController.destroy);
+
+### Repositories
 - Campos
-    title:String
-    url:String
-    techs:Number
-    createdAt:Date
-routes.get('/repositories', RepositoryController.index);
-routes.get('/repositories/:id', RepositoryController.show);
-routes.post('/repositories', RepositoryController.store);
-routes.post('/repositories/:id/like', RepositoryController.likeup);
-routes.put('/repositories/:id', RepositoryController.update);
-routes.delete('/repositories/:id', RepositoryController.destroy);
+*   title:String
+*   url:String
+*   techs:Number
+*   createdAt:Date
 
-//Link acesso ao CHAT - Socket.IO
-host:3002/chat/
+- [x] routes.get('/repositories', RepositoryController.index);
+- [x] routes.get('/repositories/:id', RepositoryController.show);
+- [x] routes.post('/repositories', RepositoryController.store);
+- [x] routes.post('/repositories/:id/like', RepositoryController.likeup);
+- [x] routes.put('/repositories/:id', RepositoryController.update);
+- [x] routes.delete('/repositories/:id', RepositoryController.destroy);
 
-//Link acesso a arquivos upload imagens
-host:3001/files/
+### Link acesso ao CHAT - Socket.IO
+- [x] host:3002/chat/
+
+### Link acesso a arquivos upload imagens
+- [x] host:3001/files/
 
 
 ```
