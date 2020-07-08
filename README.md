@@ -39,8 +39,8 @@ SMTP_EMAIL_REC=
 ### **Docker**
 ```sh
 - Para criação da maquina API apenas com o comando: 
-    * docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
-    * docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
+    * docker build -t <USUARIO_DOCKER>/<NOME_APP>:1.0 .    (Gera a imagem da maquina) 
+    * docker run --rm -it  -p 3001:3001/tcp <NOME_APP>/api_gostack:1.0 
     
 - Para Execução da API e DB juntos executar: 
     * docker-compose up 
