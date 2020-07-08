@@ -8,14 +8,15 @@ const Message = mongoose.model('Message');
 //Inicio SocketIO
 const server = require('http').createServer(http);
 const io = require('socket.io')(server);
+
 //Inicio Serviço HTML
 
-http.use(express.static(path.join(__dirname, '../public')));
+http.use('/chat', express.static(path.join(__dirname, '../public')));
 http.set('views', path.join(__dirname, '../public'));
 http.engine('html', require('ejs').renderFile);
 http.set('view engine', 'html');
 
-http.use('/', (req, res) => {
+http.use('/chat', (req, res) => {
   res.render('index.html');
 });
 
@@ -50,8 +51,9 @@ io.on('connection', socket => {
     //Gerando lista de usuários On-Line
     const userID = socket.id;
     connectedUsers.push(userID);
-    var address = socket.client.request
-    //console.log(address);
+    var address = socket.request.connection._peername.address;
+    var address2 = socket.request.connection.remoteAddress;
+    console.log(address, address2);
     socket.emit('previousMessages', messages);
     socket.emit('connectedUsers', connectedUsers);
     socket.broadcast.emit('connectedUsers', connectedUsers);

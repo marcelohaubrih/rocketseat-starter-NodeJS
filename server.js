@@ -2,32 +2,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
+const path = require('path');
 
 
 require('dotenv').config({  
   path: process.env.NODE_ENV === "test" ? ".env.testing" : ".env"
 })
 
-var whitelist = ['http://exemple.com']
-var corsOptions = {
-  origin: function (origin, callback) {
-      //console.log(origin);
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-
 //Iniciando o APP
 const app = express();
 
+// Rota Statica para arquivos de Imagens, CSS e outros via HTTP PORTA 3001
+app.use('/files', express.static(path.join(__dirname, 'src/files')));
 
+// Habilitando recebimento de JSON no Body
 app.use(express.json());
 
 app.use((req, res, next) => {
-    //console.log(`Acessou o Middleware!: ${Date.now()}`);
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
     app.use(cors());
@@ -49,6 +40,7 @@ mongoose.connect(
     console.log("Erro: Conexão com MongoDB não foi realizada com sucesso!");
 });
 
+// Carregando Models
 requireDir('./src/app/models');
 
 // Rotas

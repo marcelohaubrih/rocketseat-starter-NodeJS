@@ -29,6 +29,7 @@ Versão 1.0:
 - Campos
     name:String
     email:String
+    avatar:String
     password:String
     passwordResetToken:String
     passwordResetExpires:Date
@@ -39,6 +40,7 @@ routes.post('/user', UserController.store);
 routes.post('/user/login', UserController.login);
 routes.post('/user/forgot_password', UserController.forgot);
 routes.post('/user/reset_password', UserController.reset);
+routes.patch('/user/avatar/:id/:email', UserController.avatar);
 routes.put('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.destroy);
 
@@ -67,6 +69,8 @@ routes.post('/repositories/:id/like', RepositoryController.likeup);
 routes.put('/repositories/:id', RepositoryController.update);
 routes.delete('/repositories/:id', RepositoryController.destroy);
 
+//Link acesso ao CHAT - Socket.IO
+host:3002/chat
 
 ### RELEASES
 1.3.1 - Adicionado suporte a SocketIO

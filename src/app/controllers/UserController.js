@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 const authConfig = require('../../config/auth.json');
 const crypto = require('crypto');
 const mailer = require('../../modules/mailer');
+const multer = require('multer');
+const path = require('path');
+
 require('dotenv').config();
 
 function generateToken(params = {}){
@@ -210,7 +213,6 @@ module.exports = {
                 message: "Usuário editado com sucesso!"
             });            
         });
-        return res.json(product);
     },
 
     async destroy(req, res){
@@ -224,5 +226,108 @@ module.exports = {
                 message: "Registro excluído com sucesso"
             })
         });
+    },
+
+    async avatar(req, res){
+        const storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+                cb(null, path.join(__dirname, '../../../src/files'));
+            },
+            filename: (req, file, cb) => {
+                cb(null, Date.now() + path.extname(file.originalname));
+            }
+        });
+        
+        const fileFilter = (req, file, cb) => {
+            if (file.mimetype == 'image/jpeg' || file.mimetype == 'image/jpg' || file.mimetype == 'image/png' || file.mimetype == 'image/gif' || file.mimetype == 'image/png') {
+                cb(null, true);
+            } else {
+                cb(null, false);
+            }
+        }
+
+        var upload = multer({ 
+            storage: storage, 
+            fileFilter: fileFilter,
+            onError : function(err, next) {
+                console.log('error', err);
+                next(err);
+              }            
+        }).single('image')
+
+        try {
+            const findUser = await User.findById(req.params.id)
+        
+            if(findUser){
+                upload(req, res, async function (err) {
+                    if (err instanceof multer.MulterError) {
+                      // A Multer error occurred when uploading.
+                        return res.status(400).json({
+                            message: 'MulterError - File uploded Error',
+                            err
+                        });               
+                    } else if (err) {
+                        return res.status(400).json({
+                            message: 'FatalError - File uploded Error 2',
+                            err
+                        });              
+                    }
+                    if (!req.file){
+                        return res.status(400).json({
+                            message: 'Incompatible File - uploded Error',
+                        });  
+                    }else{
+                        await User.findByIdAndUpdate(req.params.id, { "avatar": req.file.filename}, { new: true }, (err) => {
+                            if(err) return res.status(400).json({
+                                error: true,
+                                message: "Fatal Error: user not updated!"
+                            });
+                            return res.status(201).json({
+                                message: 'User updated successfully',
+                                file: req.file.filename,
+                                userId: req.params.id,
+                                userEmail: req.params.email
+                            });                                
+                        });              
+                    }
+                }); 
+            }else{
+                console.log('Não encontrado');
+            }
+        } catch (error) {
+            return res.status(400).json({
+                message: 'Error - find user',
+                error
+            });        
+        }
+        /* 
+        upload(req, res, function (err) {
+            if (err instanceof multer.MulterError) {
+              // A Multer error occurred when uploading.
+                return res.status(400).json({
+                    message: 'MulterError - File uploded Error',
+                    err
+                });               
+            } else if (err) {
+                return res.status(400).json({
+                    message: 'FatalError - File uploded Error 2',
+                    err
+                });              
+            }
+            if (!req.file){
+                return res.status(400).json({
+                    message: 'Incompatible File - uploded Error',
+                });  
+            }else{
+                return res.status(201).json({
+                    message: 'File uploded successfully',
+                    file: req.file.filename,
+                    userId: req.params.id,
+                    userEmail: req.params.email
+                });              
+            }
+        }); 
+        */
+
     }
 };

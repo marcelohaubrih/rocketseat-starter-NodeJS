@@ -1,5 +1,7 @@
 const express = require('express');
 const routes = express.Router();
+const multer = require('multer');
+const path = require('path');
 
 const ProductController = require('./app/controllers/ProductController');
 const UserController = require('./app/controllers/UserController');
@@ -17,6 +19,7 @@ routes.post('/user', UserController.store);
 routes.post('/user/login', UserController.login);
 routes.post('/user/forgot_password', UserController.forgot);
 routes.post('/user/reset_password', UserController.reset);
+routes.patch('/user/avatar/:id/:email', UserController.avatar);
 routes.put('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.destroy);
 
