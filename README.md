@@ -23,12 +23,12 @@ Para criação da maquina API apenas com o comando:
 Para Execução da API e DB juntos executar: 
     - docker-compose up 
     - docker-compose up --build (Para recriar as imagens com as alterações) 
+
  
 ### Versão 1.0: 
- 
+``` 
 ## Dispoível as seguintes rotas
 
-```
 //Users
 - Campos
     name:String
@@ -79,7 +79,7 @@ host:3002/chat/
 //Link acesso a arquivos upload imagens
 host:3001/files/
 
-
-### RELEASES
 ```
+### RELEASES
+
 1.3.1 - Adicionado suporte a SocketIO
