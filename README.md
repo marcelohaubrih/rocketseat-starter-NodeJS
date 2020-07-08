@@ -31,13 +31,15 @@ SMTP_EMAIL_REC=
 
 #### Users
 ##### Campos
-   name:String
-   email:String
-   avatar:String
-   password:String
-   passwordResetToken:String
-   passwordResetExpires:Date
-   createdAt:Date
+   | Campo                | Tipo    |
+   |....................  |.........|
+   | name                 | String  |
+   | email                | String  |
+   | avatar               | String  |
+   | password             | String  |
+   | passwordResetToken   | String  |
+   | passwordResetExpires | Date    |
+   | createdAt            | Date    |
 
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
