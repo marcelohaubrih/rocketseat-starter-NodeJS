@@ -1,29 +1,28 @@
 ## Desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat
 
-Criar o .env com as seguintes variaveis ambientes
-DB_URL=(Padrão localhost)
-DB_PORT=(Padrão 27017)
-API_PORT=(Padrão 3001)
-SOCKET_PORT=(Padrão 3002)
-SMTP_HOST=(url)
-SMTP_PORT=465 or 587
-SMTP_USER=(user ou email)
-SMTP_PASS=(password)
-SMTP_EMAIL_FROM=(from@email.com)
-SMTP_NOME_ENV=API-GOSTACK
-SMTP_EMAIL_REC=
+Criar o .env com as seguintes variaveis ambientes 
+DB_URL=(Padrão localhost) 
+DB_PORT=(Padrão 27017) 
+API_PORT=(Padrão 3001) 
+SOCKET_PORT=(Padrão 3002) 
+SMTP_HOST=(url) 
+SMTP_PORT=465 or 587 
+SMTP_USER=(user ou email) 
+SMTP_PASS=(password) 
+SMTP_EMAIL_FROM=(from@email.com) 
+SMTP_NOME_ENV=API-GOSTACK 
+SMTP_EMAIL_REC= 
 
 Para criação da maquina API apenas com o comando: 
-    - docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina)
-    - docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0
-    - 
-
+    - docker build -t mhcoyote/api_gostack:1.0 .    (Gera a imagem da maquina) 
+    - docker run --rm -it  -p 3001:3001/tcp mhcoyote/api_gostack:1.0 
+    
 Para Execução da API e DB juntos executar: 
-    - docker-compose up
-    - docker-compose up --build (Para recriar as imagens com as alterações)
-
-Versão 1.0:
-
+    - docker-compose up 
+    - docker-compose up --build (Para recriar as imagens com as alterações) 
+ 
+Versão 1.0: 
+ 
 ## Dispoível as seguintes rotas
 //Users
 - Campos
@@ -70,7 +69,10 @@ routes.put('/repositories/:id', RepositoryController.update);
 routes.delete('/repositories/:id', RepositoryController.destroy);
 
 //Link acesso ao CHAT - Socket.IO
-host:3002/chat
+host:3002/chat/
+
+//Link acesso a arquivos upload imagens
+host:3001/files/
 
 ### RELEASES
 1.3.1 - Adicionado suporte a SocketIO
