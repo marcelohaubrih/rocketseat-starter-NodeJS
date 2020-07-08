@@ -5,6 +5,7 @@
   "repository": "https://github.com/marcelohaubrih/rocketseat-starter-NodeJS.git",
   "author": "Marcelo Haubrih <marcelohaubrih@gmail.com>",
   "license": "MIT",
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit ' ",
     "dev": "nodemon server.js"
