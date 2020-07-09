@@ -1,7 +1,7 @@
 # API_NODEJS + Docker
 > Inicialmente desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
 > 
-> **OBS:**  * Constantemente atualizado com rotas e modulos para treinamento.
+> **OBS:**  Constantemente atualizado com rotas e modulos para treinamento.
 
 
 <p align="center">
