@@ -12,6 +12,7 @@ const authMiddleware = require('./app/middlewares/auth');
 
 //Users
 routes.get('/user', UserController.index);
+routes.get('/user/pages', UserController.pages);
 routes.get('/user/:id', UserController.show);
 routes.post('/user', UserController.store);
 routes.post('/user/login', UserController.login);
@@ -23,6 +24,7 @@ routes.delete('/user/:id', UserController.destroy);
 
 //Products
 routes.get('/products', authMiddleware, ProductController.index);
+routes.get('/products/pages', authMiddleware, ProductController.pages);
 routes.get('/products/:id', authMiddleware, ProductController.show);
 routes.post('/products', authMiddleware, ProductController.store);
 routes.put('/products/:id', authMiddleware, ProductController.update);
