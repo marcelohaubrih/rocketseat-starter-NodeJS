@@ -51,15 +51,15 @@ SMTP_EMAIL_REC=
 # Versão 1.4.4 
 
 ## Users
-Campo | Tipo 
-------|-----
-name | String
-email | String
-avatar|String
-password|String
-passwordResetToken | String
-passwordResetExpires | Date
-createdAt | Date
+| Campo                | Tipo   |
+| -------------------- | ------ |
+| name                 | String |
+| email                | String |
+| avatar               | String |
+| password             | String |
+| passwordResetToken   | String |
+| passwordResetExpires | Date   |
+| createdAt            | Date   |
 * **Rotas**
 - [x] routes.get('/user', UserController.index);
 - [x] routes.get('/user/:id', UserController.show);
@@ -73,12 +73,12 @@ createdAt | Date
 ---
 
 ## Products
- Campo | Tipo
--------|-----
-title|String
-description|String
-url|String
-createdAt|Date
+ | Campo       | Tipo   |
+ | ----------- | ------ |
+ | title       | String |
+ | description | String |
+ | url         | String |
+ | createdAt   | Date   |
 * **Rotas**
 - [x] routes.get('/products', ProductController.index);
 - [x] routes.get('/products/:id', ProductController.show);
@@ -88,12 +88,12 @@ createdAt|Date
 ---
 
 ## Repositories
- Campo | Tipo
--------|-----
-title|String
-url|String
-techs|Number
-createdAt|Date
+ | Campo     | Tipo   |
+ | --------- | ------ |
+ | title     | String |
+ | url       | String |
+ | techs     | Number |
+ | createdAt | Date   |
 * **Rotas**
 - [x] routes.get('/repositories', RepositoryController.index);
 - [x] routes.get('/repositories/:id', RepositoryController.show);
@@ -123,6 +123,12 @@ host:3001/files/
   * Adicionado rota fixa /files
 * 1.4.4 
   * Fix rota fixa do Chat Socket.IO
+
+## Futuras Atualizações
+
+- [ ] Verificar se a imagem existe na listagem do usuário
+- [ ] Ao atualizar o avatar apagar imagem anterior
+- [ ] Padronização de erros
 
 ## Licença
 
