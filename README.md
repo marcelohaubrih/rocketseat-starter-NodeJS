@@ -1,7 +1,7 @@
 # API_NODEJS + Docker
 > Inicialmente desenvolvido em aula de NodeJS ministrada por Diego Fernandes da Rocketseat.
 > 
-> **OBS:**  Constantemente atualizado com rotas e modulos para treinamento.
+> **OBS:**  Constantemente atualizado com rotas e módulos para treinamento.
 
 
 <p align="center">
@@ -22,7 +22,7 @@
 
 
 
-### Criar o .env com as seguintes variaveis ambientes 
+### Criar o .env com as seguintes variáveis ambientes 
 ```sh
 DB_URL=(Padrão localhost) 
 DB_PORT=(Padrão 27017) 
@@ -40,7 +40,7 @@ SMTP_EMAIL_REC=
 ### **Docker**
 ```sh
 - Para criação da maquina API apenas com o comando: 
-    * docker build -t <USUARIO_DOCKER>/<NOME_APP>:1.0 .    (Gera a imagem da maquina) 
+    * docker build -t <USUÁRIO_DOCKER>/<NOME_APP>:1.0 .    (Gera a imagem da maquina) 
     * docker run --rm -it  -p 3001:3001/tcp <NOME_APP>/api_gostack:1.0 
     
 - Para Execução da API e DB juntos executar: 
