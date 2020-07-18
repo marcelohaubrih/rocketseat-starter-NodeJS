@@ -123,6 +123,8 @@ host:3001/files/
   * Adicionado rota fixa /files
 * 1.4.4 
   * Fix rota fixa do Chat Socket.IO
+* 1.4.5
+  * 
 
 ## Futuras Atualizações
 
