@@ -26,6 +26,7 @@
 ```sh
 DB_URL=(Padrão localhost) 
 DB_PORT=(Padrão 27017) 
+API_HOST=(Padrão http://localhost)
 API_PORT=(Padrão 3001) 
 SOCKET_PORT=(Padrão 3002) 
 SMTP_HOST=(url)
