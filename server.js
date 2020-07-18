@@ -12,7 +12,7 @@ require('dotenv').config({
 //Iniciando o APP
 const app = express();
 
-// Rota Statica para arquivos de Imagens, CSS e outros via HTTP PORTA 3001
+// Rota estática para arquivos de Imagens, CSS e outros via HTTP PORTA 3001
 app.use('/files', express.static(path.join(__dirname, 'src/files')));
 
 // Habilitando recebimento de JSON no Body
@@ -54,8 +54,9 @@ require('./src/modules/socket');
 app.listen(process.env.API_PORT || 3001, () => {
     console.log(`🔓-💾 - Servidor API iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/api`);
     console.log(`🔓-💾 - Servidor HTTP iniciado na porta ${process.env.API_PORT || 3001}: http://localhost:${process.env.API_PORT || 3001}/`);
-    console.log(`Variaveis ambiente configuradas:`);
+    console.log(`Variáveis ambiente configuradas:`);
     console.log(`DB_URL: ${process.env.DB_URL} - DB_PORT: ${process.env.DB_PORT}`);
+    console.log(`API_HOST: ${process.env.API_HOST}`);
     console.log(`API_PORT: ${process.env.API_PORT} - SOCKET_PORT: ${process.env.SOCKET_PORT}`);
     console.log(`SMTP_HOST: ${process.env.SMTP_HOST} - SMTP_PORT: ${process.env.SMTP_PORT}`);
     console.log(`SMTP_USER: ${process.env.SMTP_USER} - SMTP_PASS: ${process.env.SMTP_PASS}`);

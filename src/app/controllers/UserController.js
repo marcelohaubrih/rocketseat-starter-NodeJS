@@ -135,6 +135,8 @@ module.exports = {
             });
 
             const token = crypto.randomBytes(20).toString('hex');
+            const url = process.env.API_HOST;
+            const port = process.env.API_PORT;
             const now = new Date();
             now.setHours(now.getHours() + 1);
 
@@ -148,16 +150,20 @@ module.exports = {
                 to: email,
                 from: process.env.SMTP_EMAIL_FROM,
                 template: 'auth/forgot_password',
-                subject: 'APP-GOSTACK - forgot password',
-                //text: `seu token: ${token}`,
-                //html: `<p>seu token: ${token}</p>`,
-                context: { token },
+                subject: `${process.env.SMTP_NOME_ENV} - forgot password`,
+                // text: `seu token: ${token}`,
+                // html: `<p>seu token: ${token}</p>`,
+                context: { token, url, port },
             }, (err) => {
-                console.log(err);
-                if (err) return res.status(400).json({
-                    error: true,
-                    message: "Cannot send forgot password email!"
-                });
+                if (err) {
+                    return (
+                        res.status(400).json({
+                            error: true,
+                            message: "Cannot send forgot password email!",
+                            APIError: err.response
+                        })
+                    )
+                };
                 console.log(token, now);
                 return res.status(200).json({
                     error: false,
